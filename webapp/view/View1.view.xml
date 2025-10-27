@@ -1,0 +1,90 @@
+<mvc:View
+    controllerName="com.demo.zn07ui5app.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+
+    <Page id="page" title="Employee List Page">
+        <content>
+
+            <f:SimpleForm editable="true" layout="List1">
+                <f:content>
+
+                    <Label text="Select EMPID:"/>
+                    <Select id="idSelect" items="{empModel>/EmployeeSet}" change="onSelFromSelectBox" width="300px">
+                        <items>
+                            <core:Item text="{empModel>Empid}" key="{empModel>Empid}" />
+                        </items>
+                    </Select>
+
+                    <Label text="Select Name:"/>
+                    <ComboBox id="idCb" items="{empModel>/EmployeeSet}" change="onSelFromCb" width="300px">
+                        <items>
+                            <core:Item text="{empModel>Name}" key="{empModel>Name}" />
+                        </items>
+                    </ComboBox>
+
+                    <Label text="Skill"/>
+                    <MultiComboBox id="idMcb" items="{empModel>/EmployeeSet}" change="onSelFromMcb" width="300px">
+                        <items>
+                            <core:Item text="{empModel>Skill}" key="{empModel>Skill}" />
+                        </items>
+                    </MultiComboBox>
+
+                </f:content>
+            </f:SimpleForm>
+
+            <ScrollContainer horizontal="true" vertical="true">
+                <Table id="idTable" items="{empModel>/EmployeeSet}">
+                    <headerToolbar>
+                        <Toolbar><Title text="Employee List"/></Toolbar>
+                    </headerToolbar>
+
+                    <columns>
+                        <Column><Text text="S.No"/></Column>
+                        <Column><Text text="Employee ID"/></Column>
+                        <Column><Text text="Name"/></Column>
+                        <Column><Text text="Designation"/></Column>
+                        <Column><Text text="Skill"/></Column>
+                        <Column><Text text="Email"/></Column>
+                        <Column><Text text="Phone"/></Column>
+                        <Column><Text text="Salary"/></Column>
+                        <Column><Text text="Status"/></Column>
+                        <Column><Text text="Date of joining"/></Column>
+                    </columns>
+
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{empModel>SNo}"/>
+                                <Text text="{empModel>Empid}"/>
+                                <Text text="{empModel>Name}"/>
+                                <Text text="{empModel>Designation}"/>
+                                <ObjectStatus text="{empModel>Skill}" state="{path:'empModel>Skill', formatter:'.f.colorSkill'}"/>
+                                <Text text="{empModel>Email}"/>
+                                <Text text="{empModel>Phone}"/>
+                                <Text text="{path:'empModel>Salary', formatter:'.f.formatSalary'}"/>
+                                <ObjectStatus text="{empModel>Status}" state="{path:'empModel>Status', formatter:'.f.colorStatus'}"/>
+                                <Text text="{path:'empModel>Doj', formatter:'.f.formatDate'}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+
+                </Table>
+            </ScrollContainer>
+
+        </content>
+
+        <footer>
+            <Bar>
+                <contentRight>
+                    <Button text="Submit" type="Accept" press="onSubmit"/>
+                </contentRight>
+            </Bar>
+        </footer>
+
+    </Page>
+</mvc:View>
