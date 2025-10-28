@@ -103,6 +103,9 @@ sap.ui.define([
             }
             this._oDialog.open();
         },
+         onPressClose: function() {
+            this._oDialog.close();
+         },
 
         onPressRowFromF4Help: function (oEvent) {
             var oSelected = oEvent.getSource().getBindingContext("empModel").getObject();
