@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+<Dialog titel="Select an Employee">
+  <ScrollContainer horizontal="true" vertical="true">
+                <Table  items="{empModel>/EmployeeSet}">
+                  <!-- <headerToolbar>
+                    <Toolbar>
+                    </Toolbar>
+                  </headerToolbar> -->
+                    <columns>
+                        <Column><Text text="S.No"/></Column>
+                        <Column><Text text="Employee ID"/></Column>
+                        <Column><Text text="Name"/></Column>
+                        <Column><Text text="Designation"/></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Active" press="onPressRowFromF4Help">
+                            <cells>
+                                <Text text="{empModel>SNo}"/>
+                                <Text text="{empModel>Empid}"/>
+                                <Text text="{empModel>Name}"/>
+                                <Text text="{empModel>Designation}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </ScrollContainer>
+</Dialog>
+</core:FragmentDefinition>

@@ -10,10 +10,12 @@
     <Page id="page" title="Employee List Page">
         <content>
 
-            <f:SimpleForm editable="true" layout="List1">
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
                 <f:content>
-
-                    <Label text="Select EMPID:"/>
+                   <Label text="EMP ID" />
+                   <Input id="idEmpId" showValueHelp="true" valueHelpRequest="onPressF4Help"  width="300px"/>
+                   
+                    <Label text="Select Employee ID"/>
                     <Select id="idSelect" items="{empModel>/EmployeeSet}" change="onSelFromSelectBox" width="300px">
                         <items>
                             <core:Item text="{empModel>Empid}" key="{empModel>Empid}" />
@@ -40,7 +42,10 @@
             <ScrollContainer horizontal="true" vertical="true">
                 <Table id="idTable" items="{empModel>/EmployeeSet}">
                     <headerToolbar>
-                        <Toolbar><Title text="Employee List"/></Toolbar>
+                        <Toolbar><Title text="Employee List"/>
+                        <ToolbarSpacer/>
+                        <Button type="Reject" icon="sap-icon://excel-attachment" press="onExportToXL"/>
+                        </Toolbar>
                     </headerToolbar>
 
                     <columns>

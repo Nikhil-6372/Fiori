@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
     "sap/ui/model/json/JSONModel",
-    "com/demo/zn07ui5app/model/models"
-], function (UIComponent, JSONModel, models) {
+    "com/demo/zn07ui5app/model/models",
+     "sap/ui/export/Spreadsheet"
+], function (UIComponent, JSONModel, models, Spreadsheet) {
     "use strict";
 
     return UIComponent.extend("com.demo.zn07ui5app.Component", {

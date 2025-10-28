@@ -1,19 +1,15 @@
 sap.ui.define([
-    "sap/ui/core/UIComponent",
+    "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "com/demo/zn07ui5app/model/formatter"
-], function (UIComponent, JSONModel, formatter) {
+    "com/demo/zn07ui5app/model/formatter",
+    "sap/ui/export/Spreadsheet"
+], function (Controller, JSONModel, formatter, Spreadsheet) {
     "use strict";
 
-    return UIComponent.extend("com.demo.zn07ui5app.Component", {
-        metadata: {
-            manifest: "json"
-        },
-        f: formatter,  
+    return Controller.extend("com.demo.zn07ui5app.controller.View1", {
+        f: formatter,
 
-        init: function () {
-            UIComponent.prototype.init.apply(this, arguments);
-
+        onInit: function () {
             var oData = {
                 "EmployeeSet": [
                     {
@@ -25,7 +21,7 @@ sap.ui.define([
                         "Email": "amit@example.com",
                         "Phone": "9991112222",
                         "Salary": "50000",
-                        "Status": "PERMINANT",
+                        "Status": "PERMANENT",
                         "Doj": "2025-10-06T10:00:00"
                     },
                     {
@@ -49,7 +45,7 @@ sap.ui.define([
                         "Email": "priya@example.com",
                         "Phone": "7775554444",
                         "Salary": "55000",
-                        "Status": "PERMINANT",
+                        "Status": "PERMANENT",
                         "Doj": "2025-12-24T17:30:00"
                     },
                     {
@@ -73,22 +69,77 @@ sap.ui.define([
                         "Email": "sujit@example.com",
                         "Phone": "6664441111",
                         "Salary": "65000",
-                        "Status": "PERMINANT",
+                        "Status": "PERMANENT",
                         "Doj": "2025-02-02T17:30:00"
                     }
                 ]
             };
 
             var oModel = new JSONModel(oData);
-            this.setModel(oModel, "empModel");
+            this.getView().setModel(oModel, "empModel");
         },
 
+        // onsubmit read function
+
         onSubmit: function () {
-            var SelBoxValue = this.getRootControl().byId("idSelect").getSelectedKey();  
-            var ComboBoxValues = this.getRootControl().byId("idCb").getSelectedKey();   
-            var mcbValues = this.getRootControl().byId("idMcb").getSelectedKeys();       
+            var oView = this.getView();
+            var SelBoxValue = oView.byId("idSelect").getSelectedKey();  
+            var ComboBoxValues = oView.byId("idCb").getSelectedKey();   
+            var mcbValues = oView.byId("idMcb").getSelectedKeys();       
 
             alert("Selected: " + SelBoxValue + " | " + ComboBoxValues + " | " + mcbValues);
+        },
+
+        // F4Help Functionality
+
+        onPressF4Help: function () {
+            if (!this._oDialog) {
+                this._oDialog = sap.ui.xmlfragment(
+                    this.getView().getId(),
+                    "com.demo.zn07ui5app.view.EmpidF4Help",
+                    this
+                );
+                this.getView().addDependent(this._oDialog);
+            }
+            this._oDialog.open();
+        },
+
+        onPressRowFromF4Help: function (oEvent) {
+            var oSelected = oEvent.getSource().getBindingContext("empModel").getObject();
+            sap.m.MessageToast.show("Selected: " + oSelected.Name + " (" + oSelected.Empid + ")");
+            this._oDialog.close();
+        },
+
+        // Export to Excel
+
+        onExportToXL: function () {
+            var aCols = [
+                { label: 'S.No', property: 'SNo' },
+                { label: 'Employee ID', property: 'Empid' },
+                { label: 'Name', property: 'Name' },
+                { label: 'Designation', property: 'Designation' },
+                { label: 'Skill', property: 'Skill' },
+                { label: 'Email', property: 'Email' },
+                { label: 'Phone', property: 'Phone' },
+                { label: 'Salary', property: 'Salary', type: 'Number', delimiter: true, scale: 2 },
+                { label: 'Status', property: 'Status' },
+                { label: 'Date of joining', property: 'Doj', type: 'Date', format: 'dd-MM-yyyy' }
+            ];
+
+            var oRowBinding = this.getView().byId("idTable").getBinding("items");
+            var fileName = "Employees.xlsx";
+
+            var oSettings = {
+                workbook: { columns: aCols },
+                dataSource: oRowBinding,
+                fileName: fileName,
+                worker: true
+            };
+
+            var oSheet = new Spreadsheet(oSettings);
+            oSheet.build().finally(function () {
+                oSheet.destroy();
+            });
         }
     });
 });
