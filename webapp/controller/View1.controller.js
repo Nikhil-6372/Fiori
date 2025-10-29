@@ -84,9 +84,9 @@ sap.ui.define([
 
         onSubmit: function () {
             var oView = this.getView();
-            var SelBoxValue = oView.byId("idSelect").getSelectedKey();  
-            var ComboBoxValues = oView.byId("idCb").getSelectedKey();   
-            var mcbValues = oView.byId("idMcb").getSelectedKeys();       
+            var SelBoxValue = oView.byId("idSelect").getSelectedKey();
+            var ComboBoxValues = oView.byId("idCb").getSelectedKey();
+            var mcbValues = oView.byId("idMcb").getSelectedKeys();
 
             alert("Selected: " + SelBoxValue + " | " + ComboBoxValues + " | " + mcbValues);
         },
@@ -104,9 +104,9 @@ sap.ui.define([
             }
             this._oDialog.open();
         },
-         onPressClose: function() {
+        onPressClose: function () {
             this._oDialog.close();
-         },
+        },
 
         onPressRowFromF4Help: function (oEvent) {
             var oSelected = oEvent.getSource().getBindingContext("empModel").getObject();
@@ -117,34 +117,45 @@ sap.ui.define([
 
         //Reset & Clear the Filters By Reset
 
-        onPressReset: function(){
+        onPressReset: function () {
             this.getView().byId("idEmpId").setValue("");
             this.getView().byId("idName").setValue("");
             this.getView().byId("idDesig").setValue("");
             this.getView().byId("idSkill").setValue("");
-             this.getView().byId("idTable").getBinding("items").filter([]);
+            this.getView().byId("idOpr").setValue("");
+            this.getView().byId("idSalary").setValue("");
+            this.getView().byId("idTable").getBinding("items").filter([]);
         },
 
         // Adding the Filters
 
-        onPressGo: function() {
+        onPressGo: function () {
             var aFilters = [];
             var empId = this.getView().byId("idEmpId").getValue();
             var name = this.getView().byId("idName").getValue();
             var desig = this.getView().byId("idDesig").getValue();
             var skill = this.getView().byId("idSkill").getSelectedKey();
-            if (empId !== "" ){
+
+        // only for salary no need to add this if i dont want
+            var salOpr = this.getView().byId("idOpr").getSelectedKey();
+            var salary = this.getView().byId("idSalary").getValue();
+
+            if (empId !== "") {
                 aFilters.push(new Filter("Empid", "EQ", empId));
             }
-            if (name !== "" ){
+            if (name !== "") {
                 aFilters.push(new Filter("Name", "Contains", name));
-            } 
-            if (desig !== "" ){
+            }
+            if (desig !== "") {
                 aFilters.push(new Filter("Designation", "Contains", desig));
             }
-            if (skill !== "" ){
+            if (skill !== "") {
                 aFilters.push(new Filter("Skill", "Contains", skill));
-            }   
+            }
+            if (salOpr !== "" && salary !== "") {
+                aFilters.push(new Filter("Salary", salOpr, salary));
+            }
+
             this.getView().byId("idTable").getBinding("items").filter(aFilters);
         },
 
