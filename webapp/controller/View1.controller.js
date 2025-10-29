@@ -53,8 +53,8 @@ sap.ui.define([
                         "SNo": 4,
                         "Empid": "E004",
                         "Name": "Roshan",
-                        "Designation": "Tester",
-                        "Skill": "Selenium",
+                        "Designation": "Developer",
+                        "Skill": "UI5",
                         "Email": "ravi@example.com",
                         "Phone": "9993332222",
                         "Salary": "42000",
@@ -65,8 +65,8 @@ sap.ui.define([
                         "SNo": 5,
                         "Empid": "E005",
                         "Name": "Sujit",
-                        "Designation": "DevOps Engineer",
-                        "Skill": "Docker",
+                        "Designation": "Selenium Developer",
+                        "Skill": "Selenium",
                         "Email": "sujit@example.com",
                         "Phone": "6664441111",
                         "Salary": "65000",
@@ -132,7 +132,7 @@ sap.ui.define([
             var empId = this.getView().byId("idEmpId").getValue();
             var name = this.getView().byId("idName").getValue();
             var desig = this.getView().byId("idDesig").getValue();
-            var skill = this.getView().byId("idSkill").getValue();
+            var skill = this.getView().byId("idSkill").getSelectedKey();
             if (empId !== "" ){
                 aFilters.push(new Filter("Empid", "EQ", empId));
             }
