@@ -14,8 +14,14 @@
                 <f:content>
                    <Label text="EMP ID" />
                    <Input id="idEmpId" showValueHelp="true" valueHelpRequest="onPressF4Help"  width="300px"/>
+                   <Label text="Name" />
+                   <Input id="idName" width="300px"/>
+                   <Label text="Designation" />
+                   <Input id="idDesig" width="300px"/>
+                   <Label text="Skill" />
+                   <Input id="idSkill" width="300px"/>
                    
-                    <Label text="Select Employee ID"/>
+                    <!-- <Label text="Select Employee ID"/>
                     <Select id="idSelect" items="{empModel>/EmployeeSet}" change="onSelFromSelectBox" width="300px">
                         <items>
                             <core:Item text="{empModel>Empid}" key="{empModel>Empid}" />
@@ -34,17 +40,19 @@
                         <items>
                             <core:Item text="{empModel>Skill}" key="{empModel>Skill}" />
                         </items>
-                    </MultiComboBox>
-
+                    </MultiComboBox> -->
                 </f:content>
             </f:SimpleForm>
-
+            <FlexBox justifyContent="End">
+              <Button text="Go" icon="sap-icon://accept" type="Accept" press="onPressGo"/>
+              <Button text="Reset" icon="sap-icon://reset" type="Ghost" press="onPressReset" class="sapUiTinyMarginBegin"/>
+            </FlexBox>
             <ScrollContainer horizontal="true" vertical="true">
                 <Table id="idTable" items="{empModel>/EmployeeSet}">
                     <headerToolbar>
                         <Toolbar><Title text="Employee List"/>
                         <ToolbarSpacer/>
-                        <Button type="Reject" icon="sap-icon://excel-attachment" press="onExportToXL"/>
+                        <Button type="Emphasized" icon="sap-icon://excel-attachment" press="onExportToXL"/>
                         </Toolbar>
                     </headerToolbar>
 
@@ -86,7 +94,7 @@
         <footer>
             <Bar>
                 <contentRight>
-                    <Button text="Submit" type="Accept" press="onSubmit"/>
+                    <Button text="Submit" type="Emphasized" press="onSubmit"/>
                 </contentRight>
             </Bar>
         </footer>

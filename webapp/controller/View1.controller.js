@@ -2,8 +2,9 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "com/demo/zn07ui5app/model/formatter",
-    "sap/ui/export/Spreadsheet"
-], function (Controller, JSONModel, formatter, Spreadsheet) {
+    "sap/ui/export/Spreadsheet",
+    "sap/ui/model/Filter"
+], function (Controller, JSONModel, formatter, Spreadsheet, Filter) {
     "use strict";
 
     return Controller.extend("com.demo.zn07ui5app.controller.View1", {
@@ -110,7 +111,41 @@ sap.ui.define([
         onPressRowFromF4Help: function (oEvent) {
             var oSelected = oEvent.getSource().getBindingContext("empModel").getObject();
             sap.m.MessageToast.show("Selected: " + oSelected.Name + " (" + oSelected.Empid + ")");
+            this.byId("idEmpId").setValue(oSelected.Empid);
             this._oDialog.close();
+        },
+
+        //Reset & Clear the Filters By Reset
+
+        onPressReset: function(){
+            this.getView().byId("idEmpId").setValue("");
+            this.getView().byId("idName").setValue("");
+            this.getView().byId("idDesig").setValue("");
+            this.getView().byId("idSkill").setValue("");
+             this.getView().byId("idTable").getBinding("items").filter([]);
+        },
+
+        // Adding the Filters
+
+        onPressGo: function() {
+            var aFilters = [];
+            var empId = this.getView().byId("idEmpId").getValue();
+            var name = this.getView().byId("idName").getValue();
+            var desig = this.getView().byId("idDesig").getValue();
+            var skill = this.getView().byId("idSkill").getValue();
+            if (empId !== "" ){
+                aFilters.push(new Filter("Empid", "EQ", empId));
+            }
+            if (name !== "" ){
+                aFilters.push(new Filter("Name", "Contains", name));
+            } 
+            if (desig !== "" ){
+                aFilters.push(new Filter("Designation", "Contains", desig));
+            }
+            if (skill !== "" ){
+                aFilters.push(new Filter("Skill", "Contains", skill));
+            }   
+            this.getView().byId("idTable").getBinding("items").filter(aFilters);
         },
 
         // Export to Excel
