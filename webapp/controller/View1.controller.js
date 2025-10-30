@@ -3,14 +3,31 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "com/demo/zn07ui5app/model/formatter",
     "sap/ui/export/Spreadsheet",
-    "sap/ui/model/Filter"
-], function (Controller, JSONModel, formatter, Spreadsheet, Filter) {
+    "sap/ui/model/Filter",
+    "sap/ui/model/Sorter"
+], function (Controller, JSONModel, formatter, Spreadsheet, Filter, Sorter) {
     "use strict";
 
     return Controller.extend("com.demo.zn07ui5app.controller.View1", {
         f: formatter,
 
         onInit: function () {
+            this.mGroupFunctions = {
+                Designation: function(oContext) {
+                    var desig = oContext.getProperty("Desig");
+                    return{
+                        key: desig,
+                        text: desig
+                    };
+                },
+                Skill: function(oContext) {
+                    var skill = oContext.getProperty("skill");
+                    return{
+                        key: skill,
+                        text: skill
+                    };
+                }
+            }
             var oData = {
                 "EmployeeSet": [
                     {
@@ -23,7 +40,7 @@ sap.ui.define([
                         "Phone": "9991112222",
                         "Salary": "50000",
                         "Status": "PERMANENT",
-                        "Doj": "2025-10-06T10:00:00"
+                        "Doj": "2020-10-06T10:00:00"
                     },
                     {
                         "SNo": 2,
@@ -35,7 +52,7 @@ sap.ui.define([
                         "Phone": "8887776666",
                         "Salary": "60000",
                         "Status": "CONTRACT",
-                        "Doj": "2025-10-16T14:30:00"
+                        "Doj": "2022-10-16T14:30:00"
                     },
                     {
                         "SNo": 3,
@@ -47,7 +64,7 @@ sap.ui.define([
                         "Phone": "7775554444",
                         "Salary": "55000",
                         "Status": "PERMANENT",
-                        "Doj": "2025-12-24T17:30:00"
+                        "Doj": "2023-12-24T17:30:00"
                     },
                     {
                         "SNo": 4,
@@ -55,11 +72,11 @@ sap.ui.define([
                         "Name": "Roshan",
                         "Designation": "Developer",
                         "Skill": "UI5",
-                        "Email": "ravi@example.com",
+                        "Email": "rosh@example.com",
                         "Phone": "9993332222",
                         "Salary": "42000",
                         "Status": "CONTRACT",
-                        "Doj": "2025-01-02T17:30:00"
+                        "Doj": "2018-01-02T17:30:00"
                     },
                     {
                         "SNo": 5,
@@ -124,7 +141,10 @@ sap.ui.define([
             this.getView().byId("idSkill").setValue("");
             this.getView().byId("idOpr").setValue("");
             this.getView().byId("idSalary").setValue("");
+            this.getView().byId("idSortField").setSelectedKey("");
+            this.getView().byId("idSortOrder").setSelectedIndex(-1);
             this.getView().byId("idTable").getBinding("items").filter([]);
+            this.getView().byId("idTable").getBinding("items").sort([]);
         },
 
         // Adding the Filters
@@ -135,10 +155,19 @@ sap.ui.define([
             var name = this.getView().byId("idName").getValue();
             var desig = this.getView().byId("idDesig").getValue();
             var skill = this.getView().byId("idSkill").getSelectedKey();
+            // var desig = this.getView().byId("idDoj").getValue();
 
-        // only for salary no need to add this if i dont want
+            // only for salary filter no need to add this if i dont want
             var salOpr = this.getView().byId("idOpr").getSelectedKey();
             var salary = this.getView().byId("idSalary").getValue();
+
+            //  filter for date  (a little tricky , here it shows one day before data to not match with the frontend date filter
+            // So it have the connection with the formatter we need to pass the date format which match to the odata format like(yyyy-MM-dd)
+
+            // var doj = this.getView().byId("idDoj").getDateValue();
+            // doj = formatter.formatDateForFiltering(doj);
+
+
 
             if (empId !== "") {
                 aFilters.push(new Filter("Empid", "EQ", empId));
@@ -155,8 +184,32 @@ sap.ui.define([
             if (salOpr !== "" && salary !== "") {
                 aFilters.push(new Filter("Salary", salOpr, salary));
             }
+            // if (doj!=="") {
+            //     aFilters.push(new Filter("Doj","EQ",doj));
+            // }
 
+            //Sorting goes here
+
+           
+            var aSorters =[];
+            var groupField = this.getView().byId("idGroupField").getSelectedKey();
+            var groupOrder = this.getView().byId("idGroupOrder").getSelectedIndex();
+            var vGroupFn = this.mGroupFunctions[groupField];
+
+            if (groupField && groupOrder >= 0) {
+                aSorters.push(new Sorter(groupField, (groupOrder === 0)?false:true, vGroupFn));
+            }
+
+
+            var sortField = this.getView().byId("idSortField").getSelectedKey();
+            var sortOrder = this.getView().byId("idSortOrder").getSelectedIndex();
+
+
+            if (sortField && sortOrder >= 0) {
+                aSorters.push(new Sorter(sortField, sortOrder === 1));
+            }
             this.getView().byId("idTable").getBinding("items").filter(aFilters);
+            this.getView().byId("idTable").getBinding("items").sort(aSorters);
         },
 
         // Export to Excel
