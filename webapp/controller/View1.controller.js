@@ -13,16 +13,16 @@ sap.ui.define([
 
         onInit: function () {
             this.mGroupFunctions = {
-                Designation: function(oContext) {
-                    var desig = oContext.getProperty("Desig");
-                    return{
+                Designation: function (oContext) {
+                    var desig = oContext.getProperty("Designation");
+                    return {
                         key: desig,
                         text: desig
                     };
                 },
-                Skill: function(oContext) {
-                    var skill = oContext.getProperty("skill");
-                    return{
+                Skill: function (oContext) {
+                    var skill = oContext.getProperty("Skill");
+                    return {
                         key: skill,
                         text: skill
                     };
@@ -143,8 +143,13 @@ sap.ui.define([
             this.getView().byId("idSalary").setValue("");
             this.getView().byId("idSortField").setSelectedKey("");
             this.getView().byId("idSortOrder").setSelectedIndex(-1);
+            this.getView().byId("idGroupField").setSelectedKey("");
+            this.getView().byId("idGroupOrder").setSelectedIndex(-1);
+
             this.getView().byId("idTable").getBinding("items").filter([]);
             this.getView().byId("idTable").getBinding("items").sort([]);
+
+
         },
 
         // Adding the Filters
@@ -190,14 +195,14 @@ sap.ui.define([
 
             //Sorting goes here
 
-           
-            var aSorters =[];
+
+            var aSorters = [];
             var groupField = this.getView().byId("idGroupField").getSelectedKey();
             var groupOrder = this.getView().byId("idGroupOrder").getSelectedIndex();
             var vGroupFn = this.mGroupFunctions[groupField];
 
             if (groupField && groupOrder >= 0) {
-                aSorters.push(new Sorter(groupField, (groupOrder === 0)?false:true, vGroupFn));
+                aSorters.push(new Sorter(groupField, (groupOrder === 0) ? false : true, vGroupFn));
             }
 
 
