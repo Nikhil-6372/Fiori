@@ -6,18 +6,19 @@
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core">
+     
 
     <Page id="page" title="Employee List Page">
         <content>
-            <Panel headerText="Serch Employees" expandable="true" expanded="true">
+            <Panel headerText="Search Employees" expandable="true" expanded="true">
                 <f:SimpleForm editable="true"
                     layout="ResponsiveGridLayout"
                     labelSpanL="3" labelSpanM="3"
                     emptySpanL="0" emptySpanM="0"
                     columnsL="3" columnsM="3">
                     <f:content>
-                    <core:Title text="Filter Details:"/>
-                        <Label text="EMP ID" />
+                        <core:Title text="Filter Details:"/>
+                        <Label text="EMP ID" required="true"/>
                         <Input id="idEmpId"
                             showValueHelp="true"
                             valueHelpRequest="onPressF4Help"
@@ -56,8 +57,7 @@
                         <Label text="Date of Joining" />
                         <DatePicker id="idDoj" width="300px" />
 
-
-                        <core:Title text = "Sort The Details:"/>
+                        <core:Title text="Sort The Details:"/>
                         <Label text="Sort Field"/>
                         <ComboBox id="idSortField" width="300px">
                              <items>
@@ -69,15 +69,16 @@
                                  <core:Item text="Date of Joining" key="Doj"/>
                              </items>
                         </ComboBox>
-                        <Label text ="Sort Order"/>
-                        <RadioButtonGroup id ="idSortOrder" selectedIndex="-1" columns="2">
+
+                        <Label text="Sort Order"/>
+                        <RadioButtonGroup id="idSortOrder" selectedIndex="-1" columns="2">
                             <buttons>
-                                <RadioButton text ="Ascending"/>
-                                <RadioButton text ="Descending"/>
+                                <RadioButton text="Ascending"/>
+                                <RadioButton text="Descending"/>
                             </buttons>
                         </RadioButtonGroup>
 
-                        <core:Title text = "Grouping Employees:"/>
+                        <core:Title text="Grouping Employees:"/>
                         <Label text="Grouping:"/>
                         <ComboBox id="idGroupField" width="300px">
                              <items>
@@ -85,11 +86,12 @@
                                  <core:Item text="Skill" key="Skill"/>
                              </items>
                         </ComboBox>
-                        <Label text ="Group Order"/>
-                        <RadioButtonGroup id ="idGroupOrder" selectedIndex="-1" columns="2">
+
+                        <Label text="Group Order"/>
+                        <RadioButtonGroup id="idGroupOrder" selectedIndex="-1" columns="2">
                             <buttons>
-                                <RadioButton text ="Ascending"/>
-                                <RadioButton text ="Descending"/>
+                                <RadioButton text="Ascending"/>
+                                <RadioButton text="Descending"/>
                             </buttons>
                         </RadioButtonGroup>
 
@@ -97,7 +99,7 @@
                 </f:SimpleForm>
 
                 <FlexBox justifyContent="End">
-                    <Button text="Go" icon="sap-icon://accept" type="Accept" press="onPressGo" />
+                    <Button text="Go" id="idGo" icon="sap-icon://accept" type="Accept" press="onPressGo" />
                     <Button text="Reset" icon="sap-icon://reset" type="Ghost"
                         press="onPressReset" class="sapUiTinyMarginBegin" />
                 </FlexBox>
@@ -126,7 +128,7 @@
                         </columns>
 
                         <items>
-                            <ColumnListItem>
+                            <ColumnListItem type="Active" press="onPressRow">
                                 <cells>
                                     <Text text="{empModel>SNo}" />
                                     <Text text="{empModel>Empid}" />
@@ -145,7 +147,10 @@
                         </items>
                     </Table>
                 </ScrollContainer>
-            </Panel>
+                
+
+
+            </Panel> 
         </content>
 
         <footer>

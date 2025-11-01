@@ -12,6 +12,7 @@ sap.ui.define([
         f: formatter,
 
         onInit: function () {
+
             this.mGroupFunctions = {
                 Designation: function (oContext) {
                     var desig = oContext.getProperty("Designation");
@@ -96,6 +97,9 @@ sap.ui.define([
             var oModel = new JSONModel(oData);
             this.getView().setModel(oModel, "empModel");
         },
+        onPress: function () {
+            this.getOwnerComponent().getRouter().navTo("RouteView2");
+        },
 
         // onsubmit read function
 
@@ -107,6 +111,19 @@ sap.ui.define([
 
             alert("Selected: " + SelBoxValue + " | " + ComboBoxValues + " | " + mcbValues);
         },
+
+        //Reading table row onclick
+
+        onPressRow: function (oEvent) {
+            var oSelected = oEvent.getSource().getBindingContext("empModel").getObject();
+            var empId = oSelected.Empid; // or any unique key
+
+            this.getOwnerComponent().getRouter().navTo("RouteView2", {
+                key: empId
+            });
+        },
+
+
 
         // F4Help Functionality
 
@@ -215,6 +232,18 @@ sap.ui.define([
             }
             this.getView().byId("idTable").getBinding("items").filter(aFilters);
             this.getView().byId("idTable").getBinding("items").sort(aSorters);
+
+            //  if (name === "") {
+            //     this.getView().byId("idEmpId").setValueState("Error");
+            //     this.getView().byId("idEmpId").setValueStateText("Employee ID is mandatory");
+            // } else {
+            //     this.getView().byId("idEmpId").setValueState("None");
+            //     var nameRegExp = /^[0-8]+$/;
+            //     if (!empId.match(empIdRegExp)) {
+            //         this.getView().byId("idEmpId").setValueState("Error");
+            //         this.getView().byId("idEmpId").setValueStateText("Employee ID must contain only Numbers");
+            //     }
+            // }
         },
 
         // Export to Excel
