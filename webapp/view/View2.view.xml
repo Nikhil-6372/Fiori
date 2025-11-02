@@ -3,7 +3,10 @@
     xmlns="sap.m">
     <Page id="page" title="Details of Employees" showNavButton="true" navButtonPress="onBackToView1">
         <content>
-            <!-- <Button text="BackToV1" press="Back"/> -->
+            <ObjectHeader
+                title="{empModel>Name}"
+                number="{empModel>Empid}"
+                numberUnit="{empModel>Designation}" />
         </content>
     </Page>
-</mvc:View> 
+</mvc:View>

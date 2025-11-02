@@ -5,22 +5,31 @@ sap.ui.define([
 
     return Controller.extend("com.demo.zn07ui5app.controller.View2", {
         onInit: function () {
-            this.getOwnerComponent().getRouter().getRoute("RouteView2").attachPatternMatched(this.onPatternMatched, this);
+            this.getOwnerComponent()
+                .getRouter()
+                .getRoute("RouteView2")
+                .attachPatternMatched(this.onObjectMatched, this);
         },
 
         onObjectMatched: function (oEvent) {
             var empId = oEvent.getParameter("arguments").key;
-            this.getView().bindElement({
-                path: "/EmployeeSet/" + empId,
-                model: "empModel"
-            });
+            var oModel = this.getView().getModel("empModel");
+            var aData = oModel.getProperty("/EmployeeSet");
 
-            sap.m.MessageToast.show("Navigated with EmpID: " + empId);
+            var iIndex = aData.findIndex(emp => emp.Empid === empId);
+
+            if (iIndex !== -1) {
+                // ✅ Correct binding path with model name
+                this.getView().bindElement({
+                    path: "empModel>/EmployeeSet/" + iIndex
+                });
+            } else {
+                sap.m.MessageToast.show("Employee not found: " + empId);
+            }
         },
 
         onBackToView1: function () {
-            // this.getOwnerComponent().getRouter().navTo("RouteView1")
-            history.go(-1)
+            history.go(-1);
         }
     });
 });
