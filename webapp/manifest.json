@@ -100,7 +100,7 @@
         },
         {
           "name": "RouteView4",
-          "pattern": "4thView",
+          "pattern": "4thView/{key}",
           "target": [
             "TargetView4"
           ]

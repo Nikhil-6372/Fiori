@@ -4,8 +4,9 @@ sap.ui.define([
     "com/demo/zn07ui5app/model/formatter",
     "sap/ui/export/Spreadsheet",
     "sap/ui/model/Filter",
-    "sap/ui/model/Sorter"
-], function (Controller, JSONModel, formatter, Spreadsheet, Filter, Sorter) {
+    "sap/ui/model/Sorter",
+    "sap/m/MessageBox"
+], function (Controller, JSONModel, formatter, Spreadsheet, Filter, Sorter, MessageBox) {
     "use strict";
 
     return Controller.extend("com.demo.zn07ui5app.controller.View1", {
@@ -137,12 +138,34 @@ sap.ui.define([
 
         //Create New Employee
 
-       onCreate: function() {
+        onCreate: function () {
             this.getOwnerComponent().getRouter().navTo("RouteView3");
         },
-       onEdit: function() {
-            this.getOwnerComponent().getRouter().navTo("RouteView4");
-       },
+
+
+        onEdit: function () {
+            var oTable = this.getView().byId("idTable");
+            var selItem = oTable.getSelectedItem();
+
+            if (!selItem) {
+                sap.m.MessageBox.error("Select the Employee first");
+                return;
+            }
+
+            // 👇 if your table binding uses empModel>/EmployeeSet
+            var oContext = selItem.getBindingContext("empModel");
+            if (!oContext) {
+                sap.m.MessageBox.error("Binding context not found for selected item");
+                return;
+            }
+
+            var empId = oContext.getProperty("Empid");
+
+            this.getOwnerComponent().getRouter().navTo("RouteView4", {
+                key: empId
+            });
+        },
+
 
 
         // F4Help Functionality

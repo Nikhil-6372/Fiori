@@ -21,34 +21,32 @@
                 emptySpanL="5"
                 emptySpanM="5">
 
-                <f:content>
-                    <Label text="Employee ID" required="true" />
-                    <Input id="idEmp" />
+              <f:content>
+    <Label text="Employee ID" required="true" />
+    <Input id="idEmp" value="{empModel>Empid}" editable="false"/>
 
-                    <Label text="Name" required="true" />
-                    <Input id="idName" />
+    <Label text="Name" required="true" />
+    <Input id="idName" value="{empModel>Name}" />
 
-                    <Label text="Designation" required="true" />
-                    <Input id="idDesig" />
+    <Label text="Designation" required="true" />
+    <Input id="idDesig" value="{empModel>Designation}" />
 
-                    <Label text="Skill" required="true" />
-                    <Input id="idSkill" />
+    <Label text="Skill" required="true" />
+    <Input id="idSkill" value="{empModel>Skill}" />
 
-                    <Label text="Email" required="true" />
-                    <Input id="idEmail" />
+    <Label text="Email" required="true" />
+    <Input id="idEmail" value="{empModel>Email}" />
 
-                    <Label text="Phone No" required="true" />
-                    <Input id="idPhone" />
+    <Label text="Phone No" required="true" />
+    <Input id="idPhone" value="{empModel>Phone}" />
 
-                    <Label text="Salary" required="true" />
-                    <Input id="idSalary" />
+    <Label text="Salary" required="true" />
+    <Input id="idSalary" value="{empModel>Salary}" />
 
-                    <Label text="Status" required="true" />
-                    <Input id="idStatus" />
+    <Label text="Status" required="true" />
+    <Input id="idStatus" value="{empModel>Status}" />
+</f:content>
 
-                    <!-- <Label text="Date of Joining" required="true" />
-                    <DatePicker id="idDoj" /> -->
-                </f:content>
 
             </f:SimpleForm>
         </content>
@@ -56,8 +54,8 @@
         <footer>
             <Bar>
                 <contentRight>
-                   <Button text="Save" press="onPressSave" type="Accept"/>
-                   <Button text="Cancel" press="onPressCancel" type="Emphasized"/>
+                   <Button text="Update" press="onPressUpdate" type="Accept"/>
+                   <Button text="Cancel" press="onNavBack" type="Emphasized"/>
                 </contentRight>
             </Bar>
         </footer>
