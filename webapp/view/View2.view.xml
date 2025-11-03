@@ -1,12 +1,68 @@
-<mvc:View controllerName="com.demo.zn07ui5app.controller.View2"
+<mvc:View
+    controllerName="com.demo.zn07ui5app.controller.View2"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="page" title="Details of Employees" showNavButton="true" navButtonPress="onBackToView1">
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
+
+    <Page id="page" title="Details of Employee" showNavButton="true" navButtonPress="onBackToView1">
         <content>
+
+            <!-- Object Header -->
             <ObjectHeader
                 title="{empModel>Name}"
-                number="{empModel>Empid}"
-                numberUnit="{empModel>Designation}" />
+                number="{path:'empModel>Salary', formatter:'.f.formatSalary'}"
+                numberUnit="INR">
+
+                <attributes>
+                    <ObjectAttribute title="Employee ID" text="{empModel>Empid}" />
+                    <ObjectAttribute title="Designation" text="{empModel>Designation}" />
+                </attributes>
+
+                <statuses>
+                    <ObjectStatus
+                        text="{empModel>Status}"
+                        state="{path:'empModel>Status', formatter:'.f.colorStatus'}" />
+                </statuses>
+            </ObjectHeader>
+
+            <!-- Tab Bar with Employee Info -->
+            <IconTabBar>
+                <items>
+                    <IconTabFilter icon="sap-icon://information" text="Information">
+                        <f:SimpleForm editable="false">
+                            <f:content>
+                                <Label text="Employee ID" />
+                                <Text text="{empModel>Empid}" />
+
+                                <Label text="Name" />
+                                <Text text="{empModel>Name}" />
+
+                                <Label text="Designation" />
+                                <Text text="{empModel>Designation}" />
+
+                                <Label text="Skill" />
+                                <Text text="{empModel>Skill}" />
+
+                                <Label text="Email" />
+                                <Text text="{empModel>Email}" />
+
+                                <Label text="Phone" />
+                                <Text text="{empModel>Phone}" />
+
+                                <Label text="Salary" />
+                                <Text text="{path:'empModel>Salary', formatter:'.f.formatSalary'}" />
+
+                                <Label text="Status" />
+                                <Text text="{empModel>Status}" />
+
+                                <Label text="Date of Joining" />
+                                <Text text="{path:'empModel>Doj', formatter:'.f.formatDate'}" />
+                            </f:content>
+                        </f:SimpleForm>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+
         </content>
     </Page>
 </mvc:View>

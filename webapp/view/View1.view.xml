@@ -105,12 +105,14 @@
                 </FlexBox>
 
                 <ScrollContainer horizontal="true" vertical="true">
-                    <Table id="idTable" items="{empModel>/EmployeeSet}">
+                    <Table id="idTable" items="{empModel>/EmployeeSet}" mode = "SingleSelectLeft">
                         <headerToolbar>
                             <Toolbar>
                                 <Title text="Employee List" />
                                 <ToolbarSpacer />
-                                <Button type="Emphasized" icon="sap-icon://excel-attachment" press="onExportToXL" />
+                                <Button text="Create Employee" icon="sap-icon://add" type="Critical" press="onCreate"/>
+                                <Button text="Edit Employee" icon="sap-icon://edit" type="Critical" press="onEdit"/>
+                                <Button type="Negative" icon="sap-icon://excel-attachment" press="onExportToXL" />
                             </Toolbar>
                         </headerToolbar>
 

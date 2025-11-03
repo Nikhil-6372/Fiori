@@ -1,14 +1,13 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], (Controller) => {
+    "sap/ui/core/mvc/Controller",
+    "com/demo/zn07ui5app/model/formatter"
+], (Controller, formatter ) => {
     "use strict";
 
     return Controller.extend("com.demo.zn07ui5app.controller.View2", {
+        f: formatter,
         onInit: function () {
-            this.getOwnerComponent()
-                .getRouter()
-                .getRoute("RouteView2")
-                .attachPatternMatched(this.onObjectMatched, this);
+            this.getOwnerComponent().getRouter().getRoute("RouteView2").attachPatternMatched(this.onObjectMatched, this);
         },
 
         onObjectMatched: function (oEvent) {
@@ -19,7 +18,7 @@ sap.ui.define([
             var iIndex = aData.findIndex(emp => emp.Empid === empId);
 
             if (iIndex !== -1) {
-                // ✅ Correct binding path with model name
+                //  binding path with model name
                 this.getView().bindElement({
                     path: "empModel>/EmployeeSet/" + iIndex
                 });

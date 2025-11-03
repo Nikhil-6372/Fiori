@@ -90,6 +90,18 @@ sap.ui.define([
                         "Salary": "65000",
                         "Status": "PERMANENT",
                         "Doj": "2025-02-02T17:30:00"
+                    },
+                    {
+                        "SNo": 6,
+                        "Empid": "E006",
+                        "Name": "Stuart",
+                        "Designation": "Selenium Developer",
+                        "Skill": "Selenium",
+                        "Email": "stuart@example.com",
+                        "Phone": "6454441111",
+                        "Salary": "70000",
+                        "Status": "PERMANENT",
+                        "Doj": "2025-02-02T17:30:00"
                     }
                 ]
             };
@@ -123,6 +135,14 @@ sap.ui.define([
             });
         },
 
+        //Create New Employee
+
+       onCreate: function() {
+            this.getOwnerComponent().getRouter().navTo("RouteView3");
+        },
+       onEdit: function() {
+            this.getOwnerComponent().getRouter().navTo("RouteView4");
+       },
 
 
         // F4Help Functionality
