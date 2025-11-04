@@ -12,30 +12,30 @@ sap.ui.define([
     return Controller.extend("com.demo.zn07ui5app.controller.View1", {
         f: formatter,
 
-       onInit: function () {
+        onInit: function () {
 
-    this.mGroupFunctions = {
-        Designation: function (oContext) {
-            var desig = oContext.getProperty("Designation");
-            return {
-                key: desig,
-                text: desig
+            this.mGroupFunctions = {
+                Designation: function (oContext) {
+                    var desig = oContext.getProperty("Designation");
+                    return {
+                        key: desig,
+                        text: desig
+                    };
+                },
+                Skill: function (oContext) {
+                    var skill = oContext.getProperty("Skill");
+                    return {
+                        key: skill,
+                        text: skill
+                    };
+                }
             };
+
+            // Use the empModel that's configured in manifest (model/Employee.json)
+            var oEmpModel = this.getOwnerComponent().getModel("empModel");
+            // ensure it's available on the view with the same name so your bindings like empModel>/EmployeeSet keep working
+            this.getView().setModel(oEmpModel, "empModel");
         },
-        Skill: function (oContext) {
-            var skill = oContext.getProperty("Skill");
-            return {
-                key: skill,
-                text: skill
-            };
-        }
-    };
-
-    // Use the empModel that's configured in manifest (model/Employee.json)
-    var oEmpModel = this.getOwnerComponent().getModel("empModel");
-    // ensure it's available on the view with the same name so your bindings like empModel>/EmployeeSet keep working
-    this.getView().setModel(oEmpModel, "empModel");
-},
 
         onPress: function () {
             this.getOwnerComponent().getRouter().navTo("RouteView2");
@@ -74,24 +74,17 @@ sap.ui.define([
             var oTable = this.getView().byId("idTable");
             var selItem = oTable.getSelectedItem();
 
-            if (!selItem) {
-                sap.m.MessageBox.error("Select the Employee first");
-                return;
+            if (selItem) {
+                var empId = selItem.getBindingContext("empModel").getProperty("Empid");
+
+                this.getOwnerComponent().getRouter().navTo("RouteView4", {
+                    key: empId
+                });
+            } else {
+                MessageBox.error("Select the employee first");
             }
-
-            // 👇 if your table binding uses empModel>/EmployeeSet
-            var oContext = selItem.getBindingContext("empModel");
-            if (!oContext) {
-                sap.m.MessageBox.error("Binding context not found for selected item");
-                return;
-            }
-
-            var empId = oContext.getProperty("Empid");
-
-            this.getOwnerComponent().getRouter().navTo("RouteView4", {
-                key: empId
-            });
         },
+
 
         onChart: function () {
             this.getOwnerComponent().getRouter().navTo("RouteView5");

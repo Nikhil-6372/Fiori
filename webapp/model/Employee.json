@@ -64,11 +64,11 @@
       "SNo": 6,
       "Empid": "E006",
       "Name": "Stuart",
-      "Designation": "Selenium Developer",
-      "Skill": "Selenium",
+      "Designation": "Senior Developer",
+      "Skill": "Java",
       "Email": "stuart@example.com",
-      "Phone": "6454441111",
-      "Salary": "70000",
+      "Phone": "6425879955",
+      "Salary": "170000",
       "Status": "PERMANENT",
       "Doj": "2025-02-02T17:30:00"
     },
@@ -83,6 +83,18 @@
       "Salary": "62000",
       "Status": "PERMANENT",
       "Doj": "2025-08-02T17:30:00"
+    },
+    {
+      "SNo": 8,
+      "Empid": "E008",
+      "Name": "Ram",
+      "Designation": "Senior Developer",
+      "Skill": "UI5",
+      "Email": "ram@example.com",
+      "Phone": "45844447856",
+      "Salary": "150000",
+      "Status": "PERMANENT",
+      "Doj": "2015-08-02T17:30:00"
     }
   ]
 }

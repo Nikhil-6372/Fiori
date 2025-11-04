@@ -45,6 +45,9 @@
 
     <Label text="Status" required="true" />
     <Input id="idStatus" value="{empModel>Status}" />
+
+    <Label text="Date of Joining" required="true" />
+    <DatePicker id="idDoj" value="{empModel>Doj}"/>
 </f:content>
 
 
@@ -54,8 +57,8 @@
         <footer>
             <Bar>
                 <contentRight>
-                   <Button text="Update" press="onPressUpdate" type="Accept"/>
-                   <Button text="Cancel" press="onNavBack" type="Emphasized"/>
+                   <Button text="Update" press="onPressUpdate" type="Critical"/>
+                   <Button text="Cancel" press="onNavBack" type="Negative"/>
                 </contentRight>
             </Bar>
         </footer>

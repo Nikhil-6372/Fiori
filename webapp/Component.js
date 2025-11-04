@@ -2,7 +2,7 @@ sap.ui.define([
     "sap/ui/core/UIComponent",
     "sap/ui/model/json/JSONModel",
     "com/demo/zn07ui5app/model/models",
-     "sap/ui/export/Spreadsheet"
+    "sap/ui/export/Spreadsheet"
 ], function (UIComponent, JSONModel, models, Spreadsheet) {
     "use strict";
 
@@ -15,25 +15,26 @@ sap.ui.define([
         },
 
         init: function () {
-            // Call the base component's init function
             UIComponent.prototype.init.apply(this, arguments);
-
-            // Set the device model
             this.setModel(models.createDeviceModel(), "device");
-
-            // Initialize routing
             this.getRouter().initialize();
-
-            // Load Employee JSON model
             this.loadEmployeeModel();
         },
 
         loadEmployeeModel: function () {
             var oModel = new JSONModel();
+            oModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
             oModel.loadData("model/Employee.json");
 
-            // After data loads, set to view
             oModel.attachRequestCompleted(() => {
+                let data = oModel.getData();
+
+                data.EmployeeSet.forEach(emp => {
+                    emp.Salary = Number(emp.Salary);
+                });
+
+                oModel.setData(data);
+
                 this.setModel(oModel, "empModel");
                 console.log("Employee JSON Loaded Successfully ✅");
             });
