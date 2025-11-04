@@ -1,0 +1,42 @@
+<mvc:View
+  controllerName="com.demo.zn07ui5app.controller.View5"
+  xmlns:mvc="sap.ui.core.mvc"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:viz="sap.viz.ui5.controls"
+  xmlns:viz.data="sap.viz.ui5.data"
+  xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+
+  <Page title="Employee Chart" showNavButton="true" navButtonPress="onBackToView1">
+    <content>
+      <Select id="idChartType" change="onChangeChartType">
+        <items>
+          <core:Item text="Column chart" key="column"/>
+          <core:Item text="Bar chart" key="bar"/>
+          <core:Item text="Line chart" key="line"/>
+          <core:Item text="Pie chart" key="pie"/>
+        </items>
+      </Select>
+
+      <viz:VizFrame id="idVizFrame" vizType="bar" width="90%" height="90%">
+        <viz:dataset>
+          <viz.data:FlattenedDataset data="{empModel>/EmployeeSet}">
+            <viz.data:dimensions>
+              <viz.data:DimensionDefinition name="EmployeeId" value="{empModel>Empid}" />
+              <viz.data:DimensionDefinition name="Name" value="{empModel>Name}" />
+            </viz.data:dimensions>
+            <viz.data:measures>
+              <viz.data:MeasureDefinition name="Salary" value="{empModel>Salary}" />
+            </viz.data:measures>
+          </viz.data:FlattenedDataset>
+        </viz:dataset>
+
+        <viz:feeds>
+          <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="EmployeeId,Name" />
+          <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Salary" />
+        </viz:feeds>
+      </viz:VizFrame>
+    </content>
+  </Page>
+</mvc:View>

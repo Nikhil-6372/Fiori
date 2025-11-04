@@ -103,6 +103,66 @@ sap.ui.define([
                         "Salary": "70000",
                         "Status": "PERMANENT",
                         "Doj": "2025-02-02T17:30:00"
+                    },
+                    {
+                        "SNo": 7,
+                        "Empid": "E007",
+                        "Name": "Priya",
+                        "Designation": "Frontend Engineer",
+                        "Skill": "React",
+                        "Email": "priya.sharma@example.com",
+                        "Phone": "9992223333",
+                        "Salary": "58000",
+                        "Status": "CONTRACT",
+                        "Doj": "2021-05-10T09:30:00"
+                    },
+                    {
+                        "SNo": 8,
+                        "Empid": "E008",
+                        "Name": "Ankit",
+                        "Designation": "DevOps Engineer",
+                        "Skill": "AWS",
+                        "Email": "ankit@example.com",
+                        "Phone": "8883331111",
+                        "Salary": "72000",
+                        "Status": "PERMANENT",
+                        "Doj": "2019-11-15T11:00:00"
+                    },
+                    {
+                        "SNo": 9,
+                        "Empid": "E009",
+                        "Name": "Tina",
+                        "Designation": "QA Engineer",
+                        "Skill": "Manual Testing",
+                        "Email": "tina@example.com",
+                        "Phone": "7779994444",
+                        "Salary": "46000",
+                        "Status": "CONTRACT",
+                        "Doj": "2020-03-12T10:00:00"
+                    },
+                    {
+                        "SNo": 10,
+                        "Empid": "E010",
+                        "Name": "Aditya",
+                        "Designation": "Cloud Engineer",
+                        "Skill": "Azure",
+                        "Email": "aditya@example.com",
+                        "Phone": "9998887777",
+                        "Salary": "80000",
+                        "Status": "PERMANENT",
+                        "Doj": "2017-07-09T15:00:00"
+                    },
+                    {
+                        "SNo": 11,
+                        "Empid": "E011",
+                        "Name": "Kritika",
+                        "Designation": "Data Analyst",
+                        "Skill": "Python",
+                        "Email": "kritika@example.com",
+                        "Phone": "6665554444",
+                        "Salary": "63000",
+                        "Status": "PERMANENT",
+                        "Doj": "2024-01-25T10:00:00"
                     }
                 ]
             };
@@ -166,6 +226,9 @@ sap.ui.define([
             });
         },
 
+        onChart: function () {
+            this.getOwnerComponent().getRouter().navTo("RouteView5");
+        },
 
 
         // F4Help Functionality

@@ -99,8 +99,8 @@
                 </f:SimpleForm>
 
                 <FlexBox justifyContent="End">
-                    <Button text="Go" id="idGo" icon="sap-icon://accept" type="Accept" press="onPressGo" />
-                    <Button text="Reset" icon="sap-icon://reset" type="Ghost"
+                    <Button text="Go" id="idGo" icon="sap-icon://accept" type="Default" press="onPressGo" />
+                    <Button text="Reset" icon="sap-icon://reset" type="Negative"
                         press="onPressReset" class="sapUiTinyMarginBegin" />
                 </FlexBox>
 
@@ -112,7 +112,9 @@
                                 <ToolbarSpacer />
                                 <Button text="Create Employee" icon="sap-icon://add" type="Critical" press="onCreate"/>
                                 <Button text="Edit Employee" icon="sap-icon://edit" type="Critical" press="onEdit"/>
-                                <Button type="Negative" icon="sap-icon://excel-attachment" press="onExportToXL" />
+                                <Button text="Delete Employee" icon="sap-icon://delete" type="Negative" press="onDelete"/>
+                                <Button text="See Charts" icon="sap-icon://filter-analytics" type="Emphasized" press="onChart"/>
+                                <Button type="Success" icon="sap-icon://excel-attachment" press="onExportToXL" />
                             </Toolbar>
                         </headerToolbar>
 
