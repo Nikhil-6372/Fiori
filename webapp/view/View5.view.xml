@@ -12,14 +12,14 @@
     <content>
       <Select id="idChartType" change="onChangeChartType">
         <items>
-          <core:Item text="Column chart" key="column"/>
-          <core:Item text="Bar chart" key="bar"/>
           <core:Item text="Line chart" key="line"/>
+          <core:Item text="Bar chart" key="bar"/>
+          <core:Item text="Column Chart" key="column"/>
           <core:Item text="Pie chart" key="pie"/>
         </items>
       </Select>
 
-      <viz:VizFrame id="idVizFrame" vizType="bar" width="90%" height="90%">
+      <viz:VizFrame id="idVizFrame" vizType="line" width="90%" height="90%">
         <viz:dataset>
           <viz.data:FlattenedDataset data="{empModel>/EmployeeSet}">
             <viz.data:dimensions>

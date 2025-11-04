@@ -12,164 +12,31 @@ sap.ui.define([
     return Controller.extend("com.demo.zn07ui5app.controller.View1", {
         f: formatter,
 
-        onInit: function () {
+       onInit: function () {
 
-            this.mGroupFunctions = {
-                Designation: function (oContext) {
-                    var desig = oContext.getProperty("Designation");
-                    return {
-                        key: desig,
-                        text: desig
-                    };
-                },
-                Skill: function (oContext) {
-                    var skill = oContext.getProperty("Skill");
-                    return {
-                        key: skill,
-                        text: skill
-                    };
-                }
-            }
-            var oData = {
-                "EmployeeSet": [
-                    {
-                        "SNo": 1,
-                        "Empid": "E001",
-                        "Name": "Amit",
-                        "Designation": "Developer",
-                        "Skill": "UI5",
-                        "Email": "amit@example.com",
-                        "Phone": "9991112222",
-                        "Salary": "50000",
-                        "Status": "PERMANENT",
-                        "Doj": "2020-10-06T10:00:00"
-                    },
-                    {
-                        "SNo": 2,
-                        "Empid": "E002",
-                        "Name": "Nikhil",
-                        "Designation": "Backend Engineer",
-                        "Skill": "Java",
-                        "Email": "nikhil@example.com",
-                        "Phone": "8887776666",
-                        "Salary": "60000",
-                        "Status": "CONTRACT",
-                        "Doj": "2022-10-16T14:30:00"
-                    },
-                    {
-                        "SNo": 3,
-                        "Empid": "E003",
-                        "Name": "Rahul",
-                        "Designation": "UI Designer",
-                        "Skill": "Figma",
-                        "Email": "priya@example.com",
-                        "Phone": "7775554444",
-                        "Salary": "55000",
-                        "Status": "PERMANENT",
-                        "Doj": "2023-12-24T17:30:00"
-                    },
-                    {
-                        "SNo": 4,
-                        "Empid": "E004",
-                        "Name": "Roshan",
-                        "Designation": "Developer",
-                        "Skill": "UI5",
-                        "Email": "rosh@example.com",
-                        "Phone": "9993332222",
-                        "Salary": "42000",
-                        "Status": "CONTRACT",
-                        "Doj": "2018-01-02T17:30:00"
-                    },
-                    {
-                        "SNo": 5,
-                        "Empid": "E005",
-                        "Name": "Sujit",
-                        "Designation": "Selenium Developer",
-                        "Skill": "Selenium",
-                        "Email": "sujit@example.com",
-                        "Phone": "6664441111",
-                        "Salary": "65000",
-                        "Status": "PERMANENT",
-                        "Doj": "2025-02-02T17:30:00"
-                    },
-                    {
-                        "SNo": 6,
-                        "Empid": "E006",
-                        "Name": "Stuart",
-                        "Designation": "Selenium Developer",
-                        "Skill": "Selenium",
-                        "Email": "stuart@example.com",
-                        "Phone": "6454441111",
-                        "Salary": "70000",
-                        "Status": "PERMANENT",
-                        "Doj": "2025-02-02T17:30:00"
-                    },
-                    {
-                        "SNo": 7,
-                        "Empid": "E007",
-                        "Name": "Priya",
-                        "Designation": "Frontend Engineer",
-                        "Skill": "React",
-                        "Email": "priya.sharma@example.com",
-                        "Phone": "9992223333",
-                        "Salary": "58000",
-                        "Status": "CONTRACT",
-                        "Doj": "2021-05-10T09:30:00"
-                    },
-                    {
-                        "SNo": 8,
-                        "Empid": "E008",
-                        "Name": "Ankit",
-                        "Designation": "DevOps Engineer",
-                        "Skill": "AWS",
-                        "Email": "ankit@example.com",
-                        "Phone": "8883331111",
-                        "Salary": "72000",
-                        "Status": "PERMANENT",
-                        "Doj": "2019-11-15T11:00:00"
-                    },
-                    {
-                        "SNo": 9,
-                        "Empid": "E009",
-                        "Name": "Tina",
-                        "Designation": "QA Engineer",
-                        "Skill": "Manual Testing",
-                        "Email": "tina@example.com",
-                        "Phone": "7779994444",
-                        "Salary": "46000",
-                        "Status": "CONTRACT",
-                        "Doj": "2020-03-12T10:00:00"
-                    },
-                    {
-                        "SNo": 10,
-                        "Empid": "E010",
-                        "Name": "Aditya",
-                        "Designation": "Cloud Engineer",
-                        "Skill": "Azure",
-                        "Email": "aditya@example.com",
-                        "Phone": "9998887777",
-                        "Salary": "80000",
-                        "Status": "PERMANENT",
-                        "Doj": "2017-07-09T15:00:00"
-                    },
-                    {
-                        "SNo": 11,
-                        "Empid": "E011",
-                        "Name": "Kritika",
-                        "Designation": "Data Analyst",
-                        "Skill": "Python",
-                        "Email": "kritika@example.com",
-                        "Phone": "6665554444",
-                        "Salary": "63000",
-                        "Status": "PERMANENT",
-                        "Doj": "2024-01-25T10:00:00"
-                    }
-                ]
+    this.mGroupFunctions = {
+        Designation: function (oContext) {
+            var desig = oContext.getProperty("Designation");
+            return {
+                key: desig,
+                text: desig
             };
-
-            var oModel = new JSONModel(oData);
-            this.getView().setModel(oModel, "empModel");
         },
+        Skill: function (oContext) {
+            var skill = oContext.getProperty("Skill");
+            return {
+                key: skill,
+                text: skill
+            };
+        }
+    };
+
+    // Use the empModel that's configured in manifest (model/Employee.json)
+    var oEmpModel = this.getOwnerComponent().getModel("empModel");
+    // ensure it's available on the view with the same name so your bindings like empModel>/EmployeeSet keep working
+    this.getView().setModel(oEmpModel, "empModel");
+},
+
         onPress: function () {
             this.getOwnerComponent().getRouter().navTo("RouteView2");
         },
