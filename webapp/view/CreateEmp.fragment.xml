@@ -1,0 +1,78 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:core="sap.ui.core">
+
+    <Dialog 
+        id="idCreatePopup"
+        title="Create Employee"
+        class="sapUiContentPadding sapUiResponsivePadding"
+        type="Message">
+
+        <VBox class="sapUiLargeMargin">
+
+            <HBox class="sapUiSmallMarginTop" alignItems="Center">
+                <Label text="Employee ID" width="120px"/>
+                <Input id="empIdInput" width="100%" placeholder="Enter Emp ID"/>
+            </HBox>
+
+            <HBox class="sapUiSmallMarginTop" alignItems="Center">
+                <Label text="Name" width="120px"/>
+                <Input id="empNameInput" width="100%" placeholder="Enter Name"/>
+            </HBox>
+
+            <HBox class="sapUiSmallMarginTop" alignItems="Center">
+                <Label text="Designation" width="120px"/>
+                <Input id="empDesigInput" width="100%" placeholder="Enter Designation"/>
+            </HBox>
+
+            <HBox class="sapUiSmallMarginTop" alignItems="Center">
+                <Label text="Skill" width="120px"/>
+                <Input id="empSkillInput" width="100%" placeholder="Enter Skill"/>
+            </HBox>
+
+            <HBox class="sapUiSmallMarginTop" alignItems="Center">
+                <Label text="E-Mail" width="120px"/>
+                <Input id="empEmailInput" width="100%" placeholder="Enter E-Mail"/>
+            </HBox>
+
+            <HBox class="sapUiSmallMarginTop" alignItems="Center">
+                <Label text="Phone" width="120px"/>
+                <Input id="empPhoneInput" width="100%" placeholder="Enter Phone no"/>
+            </HBox>
+
+           <HBox class="sapUiSmallMarginTop" alignItems="Center">
+    <Label text="Salary" width="120px"/>
+
+    <Input id="empSalaryInput"
+           width="100%"
+           placeholder="Enter Salary"
+           value="{empModel>Salary}" />
+
+    <Text text="{ path:'empModel>Salary', formatter:'.formatter.formatSalary' }" 
+          class="sapUiSmallMarginBegin"/>
+</HBox>
+
+
+            <HBox class="sapUiSmallMarginTop" alignItems="Center">
+                <Label text="Status" width="120px"/>
+                <Input id="empStatusInput" width="100%" placeholder="Enter Status"/>
+            </HBox>
+
+            <HBox class="sapUiSmallMarginTop" alignItems="Center">
+                <Label text="Date of Joining" width="120px"/>
+                <Input id="empDojInput" width="100%" placeholder="Enter Date of joining"/>
+            </HBox>
+
+        </VBox>
+
+        <beginButton>
+            <Button text="Save" type="Emphasized" press="onSaveCreate"/>
+        </beginButton>
+
+        <endButton>
+            <Button text="Cancel" type="Reject" press="onCloseCreate"/>
+        </endButton>
+
+    </Dialog>
+
+</core:FragmentDefinition>

@@ -108,6 +108,90 @@ sap.ui.define([
             this._oDialog.close();
         },
 
+
+        //Pop-up Screen
+
+        onOpenDialog: function () {
+            if (!this._oCreatePopup) {
+                this._oCreatePopup = sap.ui.xmlfragment(
+                    "com.demo.zn07ui5app.view.CreateEmp",  // ✅ new popup fragment
+                    this
+                );
+                this.getView().addDependent(this._oCreatePopup);
+            }
+            this._oCreatePopup.open();   // ✅ open popup
+        },
+
+        //adding the functionality to reset in pop-up
+
+        resetCreatePopup: function () {
+
+            this.byId("empIdInput").setValue("");
+            this.byId("empNameInput").setValue("");
+            this.byId("empDesigInput").setValue("");
+            this.byId("empSkillInput").setValue("");
+            this.byId("empEmailInput").setValue("");
+            this.byId("empPhoneInput").setValue("");
+            this.byId("empSalaryInput").setValue("");
+            this.byId("empStatusInput").setValue("");
+            this.byId("empDojInput").setValue("");
+
+        },
+
+
+        onCloseCreate: function () {
+            this.getView().byId("idEmpId").setValue("");
+            this.getView().byId("idName").setValue("");
+            this.getView().byId("idDesig").setValue("");
+            this.getView().byId("idSkill").setValue("");
+            this.getView().byId("idOpr").setValue("");
+            this.getView().byId("idSalary").setValue("");
+            this.getView().byId("idSortField").setSelectedKey("");
+            this.getView().byId("idSortOrder").setSelectedIndex(-1);
+            this.getView().byId("idGroupField").setSelectedKey("");
+            this.getView().byId("idGroupOrder").setSelectedIndex(-1);
+            this._oCreatePopup.close();
+        },
+
+        onSaveCreate: function () {
+            // 1. Read form values
+            var empId = sap.ui.getCore().byId("empIdInput").getValue();
+            var name = sap.ui.getCore().byId("empNameInput").getValue();
+            var desig = sap.ui.getCore().byId("empDesigInput").getValue();
+            var skill = sap.ui.getCore().byId("empSkillInput").getValue();
+            var email = sap.ui.getCore().byId("empEmailInput").getValue();
+            var phone = sap.ui.getCore().byId("empPhoneInput").getValue();
+            var salary = sap.ui.getCore().byId("empDesigInput").getValue();
+            var status = sap.ui.getCore().byId("empStatusInput").getValue();
+
+            // 2. Get JSON Model data
+            var oModel = this.getView().getModel("empModel");
+            var aEmployees = oModel.getProperty("/EmployeeSet");
+
+            // 3. Push new employee
+            aEmployees.push({
+                Empid: empId,
+                Name: name,
+                Designation: desig,
+                Skill: skill,
+                Email: email,
+                Phone: phone,
+                Salary: salary,
+                Status: status
+            });
+
+            // 4. Update model
+            oModel.setProperty("/EmployeeSet", aEmployees);
+
+            // 5. Show success toast
+            sap.m.MessageToast.show("Employee Created Successfully 🎉");
+
+            // 6. Close popup
+            this._oCreatePopup.close();
+        },
+
+
+
         onPressRowFromF4Help: function (oEvent) {
             var oSelected = oEvent.getSource().getBindingContext("empModel").getObject();
             sap.m.MessageToast.show("Selected: " + oSelected.Name + " (" + oSelected.Empid + ")");

@@ -110,6 +110,7 @@
                             <Toolbar>
                                 <Title text="Employee List" />
                                 <ToolbarSpacer />
+                                <Button text="Open Popup" icon="sap-icon://popup-window" type="Ghost" press="onOpenDialog"/>
                                 <Button text="Create Employee" icon="sap-icon://add" type="Critical" press="onCreate"/>
                                 <Button text="Edit Employee" icon="sap-icon://edit" type="Critical" press="onEdit"/>
                                 <Button text="Delete Employee" icon="sap-icon://delete" type="Negative" press="onDelete"/>
@@ -123,9 +124,9 @@
                             <Column><Text text="Employee ID" /></Column>
                             <Column><Text text="Name" /></Column>
                             <Column><Text text="Designation" /></Column>
-                            <Column><Text text="Skill" /></Column>
+                            <Column width="5rem"><Label text="Skill"/></Column>
                             <Column><Text text="Email" /></Column>
-                            <Column><Text text="Phone" /></Column>
+                            <Column width="8rem"><Label text="Phone"/></Column>
                             <Column><Text text="Salary" /></Column>
                             <Column><Text text="Status" /></Column>
                             <Column><Text text="Date of joining" /></Column>
