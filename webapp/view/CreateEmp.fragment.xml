@@ -70,7 +70,7 @@
         </beginButton>
 
         <endButton>
-            <Button text="Cancel" type="Reject" press="onCloseCreate"/>
+            <Button text="Cancel" type="Negative" press="onCloseCreate"/>
         </endButton>
 
     </Dialog>
